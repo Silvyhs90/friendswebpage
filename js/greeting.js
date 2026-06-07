@@ -1,16 +1,23 @@
-function greeting(name)
-{
-  let hello = (`Hola! Bienvenidx, ${name}, a la pagina tributo a la serie Friends`);
-   alert(hello);
-  document.write(hello.fontcolor("pink").fontsize(15));
+const savedName = localStorage.getItem("friendsUserName");
+
+if (!savedName) {
+  const name = prompt("¿Cómo es tu nombre?");
+
+  if (name && name.trim() !== "") {
+    localStorage.setItem("friendsUserName", name.trim());
+  }
 }
 
-function processUserInput(callback) 
-{
-const name = prompt("Como es tu nombre?");
+const userName = localStorage.getItem("friendsUserName");
 
-callback(name);
+if (userName) {
+  const welcomeMessage = document.createElement("p");
+  welcomeMessage.className = "welcome-message";
+  welcomeMessage.textContent = `Hola ${userName}, bienvenida a la página tributo de Friends 💛`;
 
+  const heroText = document.querySelector(".hero-text");
+
+  if (heroText) {
+    heroText.insertAdjacentElement("afterend", welcomeMessage);
+  }
 }
-
-processUserInput(greeting);
